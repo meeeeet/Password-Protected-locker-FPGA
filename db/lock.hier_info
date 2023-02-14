@@ -1,4 +1,18 @@
-|bcd_to_dis
+|blk_bcd
+disp[6] <= bcd_to_dis:inst.disp[6]
+disp[5] <= bcd_to_dis:inst.disp[5]
+disp[4] <= bcd_to_dis:inst.disp[4]
+disp[3] <= bcd_to_dis:inst.disp[3]
+disp[2] <= bcd_to_dis:inst.disp[2]
+disp[1] <= bcd_to_dis:inst.disp[1]
+disp[0] <= bcd_to_dis:inst.disp[0]
+in[0] => bcd_to_dis:inst.in[0]
+in[1] => bcd_to_dis:inst.in[1]
+in[2] => bcd_to_dis:inst.in[2]
+in[3] => bcd_to_dis:inst.in[3]
+
+
+|blk_bcd|bcd_to_dis:inst
 in[0] => Decoder0.IN3
 in[1] => Decoder0.IN2
 in[2] => Decoder0.IN1

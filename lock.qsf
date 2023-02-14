@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------- #
 #
-# Copyright (C) 1991-2013 Altera Corporation
+# Copyright (C) 1991-2009 Altera Corporation
 # Your use of Altera Corporation's design tools, logic functions 
 # and other software and tools, and its AMPP partner logic 
 # functions, and any output files from any of the foregoing 
@@ -16,9 +16,9 @@
 #
 # -------------------------------------------------------------------------- #
 #
-# Quartus II 64-Bit
-# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-# Date created = 18:04:15  February 13, 2023
+# Quartus II
+# Version 9.0 Build 132 02/25/2009 SJ Full Version
+# Date created = 09:38:14  February 14, 2023
 #
 # -------------------------------------------------------------------------- #
 #
@@ -38,27 +38,43 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C20F484C7
-set_global_assignment -name TOP_LEVEL_ENTITY bcd_to_dis
-set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:04:15  FEBRUARY 13, 2023"
-set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
-set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
-set_global_assignment -name VERILOG_FILE lock.v
+set_global_assignment -name TOP_LEVEL_ENTITY blk_bcd
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 9.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:38:14  FEBRUARY 14, 2023"
+set_global_assignment -name LAST_QUARTUS_VERSION 9.0
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR "M:/Codes/Verilog/logic_analy/simulation/qsim/" -section_id eda_simulation
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
-set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE /home/meet/Desktop/Lock_project/Waveform.vwf
-set_global_assignment -name SIMULATION_MODE FUNCTIONAL
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_global_assignment -name VERILOG_FILE lock.v
+set_global_assignment -name BDF_FILE blk_diagram.bdf
 set_global_assignment -name VERILOG_FILE bcd_to_dis.v
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
-set_location_assignment PIN_V12 -to in[3]
-set_location_assignment PIN_M22 -to in[2]
+set_location_assignment PIN_J2 -to disp[0]
+set_location_assignment PIN_J1 -to disp[1]
+set_location_assignment PIN_H2 -to disp[2]
+set_location_assignment PIN_H1 -to disp[3]
+set_location_assignment PIN_F2 -to disp[4]
+set_location_assignment PIN_F1 -to disp[5]
+set_location_assignment PIN_E2 -to disp[6]
 set_location_assignment PIN_L22 -to in[0]
 set_location_assignment PIN_L21 -to in[1]
-set_location_assignment PIN_J22 -to disp[0]
+set_location_assignment PIN_M22 -to in[2]
+set_location_assignment PIN_V12 -to in[3]
+set_global_assignment -name BDF_FILE blk_bcd.bdf
+set_location_assignment PIN_L22 -to digit[0]
+set_location_assignment PIN_L21 -to digit[1]
+set_location_assignment PIN_M22 -to digit[2]
+set_location_assignment PIN_V12 -to digit[3]
+set_location_assignment PIN_R22 -to clk
+set_location_assignment PIN_T22 -to reset
+set_location_assignment PIN_R21 -to start
+set_location_assignment PIN_R20 -to buzzer
+set_location_assignment PIN_U22 -to out
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
