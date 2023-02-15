@@ -14,22 +14,26 @@ module lock(
     buzzer,
     count,
     cp,
-    ci
+    ci,
+	 disp0,disp1,disp2,disp3
 );
 
 
-    input [3:0]digit;
+    input [9:0]digit;
     input reset,clk,start;
     output out,buzzer;
-
-    wire [3:0]current_pass;
+	 output [0:6] disp0;
+	 output [0:6] disp1;
+	 output [0:6] disp2;
+	 output [0:6] disp3;
+    wire [9:0]current_pass;
     wire [2:0]wrong_attempt;
    // wire [3:0]pass_serial;
 
     //assign current_pass=16'b0001000100011010;
     output [2:0]count; //verification purpose
-    output [3:0]cp; //verification purpose
-    output [3:0]ci;
+    output [9:0]cp; //verification purpose
+    output [9:0]ci;
     assign count=wrong_attempt; //verification purpose
     assign cp=current_pass; //verification purpose
     assign ci=digit;
@@ -41,8 +45,10 @@ module lock(
     update u1(current_pass,digit,reset,start,out);
 
     buzzer_ctrl buzz(wrong_attempt,buzzer,out);
+	 
+	 display seven_seg(out,disp0,disp1,disp2,disp3);
 
-
+		
 endmodule
 
 
@@ -55,8 +61,8 @@ endmodule
 module compare(
     clk,pass_in,current_pass,wrong_attempt,out
 );
-    input [3:0] pass_in;
-    input [3:0] current_pass;
+    input [9:0] pass_in;
+    input [9:0] current_pass;
     input clk;
     output reg out;
     output reg [2:0]wrong_attempt;
@@ -83,9 +89,9 @@ module  update(
     start,
     out
 );
-    input [3:0]pass_serial;
+    input [9:0]pass_serial;
     input reset,out,start;
-    output reg [3:0]current_pass;
+    output reg [9:0]current_pass;
 
     always @(negedge reset or negedge start) begin
         if (reset==0) begin
@@ -120,4 +126,41 @@ module buzzer_ctrl(wrong_attempt,buzzer,out);
         else
             buzzer=0;
     end
+endmodule
+
+
+
+module display(
+    input out,
+    output reg [0:6] disp0,
+	 output reg [0:6] disp1,
+	 output reg [0:6] disp2,
+	 output reg [0:6] disp3
+	 
+);
+
+always @(*)
+begin
+    case (out)
+        1'b1: begin
+				disp0=7'b 1101010;
+				disp1=7'b 0000001;
+				disp2=7'b 1111111;
+				disp3=7'b 1111111;
+				end
+        1'b0: begin
+				disp0=7'b 0111000;
+				disp1=7'b 0111000;
+				disp3=7'b 1111111;
+				disp2=7'b 0000001;	
+				end
+        default: begin 
+				disp0=7'b 1111110;
+				disp1=7'b 1111110;
+				disp3=7'b 1111111;
+				disp2=7'b 1111110;
+		  end
+    endcase
+end
+    
 endmodule

@@ -14,14 +14,17 @@ module lock(
     buzzer,
     count,
     cp,
-    ci
+    ci,
+	 disp0,disp1,disp2
 );
 
 
     input [3:0]digit;
     input reset,clk,start;
     output out,buzzer;
-
+	 output [0:6] disp0;
+	 output [0:6] disp1;
+	 output [0:6] disp2;
     wire [3:0]current_pass;
     wire [2:0]wrong_attempt;
    // wire [3:0]pass_serial;
@@ -41,8 +44,10 @@ module lock(
     update u1(current_pass,digit,reset,start,out);
 
     buzzer_ctrl buzz(wrong_attempt,buzzer,out);
+	 
+	 display seven_seg(out,disp0,disp1,disp2);
 
-
+		
 endmodule
 
 
@@ -120,4 +125,36 @@ module buzzer_ctrl(wrong_attempt,buzzer,out);
         else
             buzzer=0;
     end
+endmodule
+
+
+
+module display (
+    input out,
+    output reg [0:6] disp0,
+	 output reg [0:6] disp1,
+	 output reg [0:6] disp2
+);
+
+always @(*)
+begin
+    case (out)
+        1'b1: begin
+				disp0=7'b 1101010;
+				disp1=7'b 0000001;
+				disp2=7'b 1111111;
+				end
+        1'b0: begin
+				disp0=7'b 0111000;
+				disp1=7'b 0111000;
+				disp2=7'b 0000001;	
+				end
+        default: begin 
+				disp0=7'b 1111110;
+				disp1=7'b 1111110;
+				disp2=7'b 1111110;
+		  end
+    endcase
+end
+    
 endmodule
