@@ -22,10 +22,13 @@ module lock(
     input [9:0]digit;
     input reset,clk,start;
     output out,buzzer;
-	 output [0:6] disp0;
-	 output [0:6] disp1;
-	 output [0:6] disp2;
-	 output [0:6] disp3;
+
+    //pins for 7 segment display
+	output [0:6] disp0;
+	output [0:6] disp1;
+	output [0:6] disp2;
+	output [0:6] disp3;
+
     wire [9:0]current_pass;
     wire [2:0]wrong_attempt;
    // wire [3:0]pass_serial;
@@ -128,7 +131,7 @@ module buzzer_ctrl(wrong_attempt,buzzer,out);
     end
 endmodule
 
-
+/* ---------------- module for controlling 7 segment display ---------------- */
 
 module display(
     input out,
@@ -143,22 +146,22 @@ always @(*)
 begin
     case (out)
         1'b1: begin
-				disp0=7'b 1101010;
-				disp1=7'b 0000001;
-				disp2=7'b 1111111;
-				disp3=7'b 1111111;
+				disp0=7'b 1101010; //N
+				disp1=7'b 0000001; //O
+				disp2=7'b 1111111; //blank
+				disp3=7'b 1111111; //blank
 				end
         1'b0: begin
-				disp0=7'b 0111000;
-				disp1=7'b 0111000;
-				disp3=7'b 1111111;
-				disp2=7'b 0000001;	
+				disp0=7'b 0111000; //F
+				disp1=7'b 0111000; //F
+				disp3=7'b 1111111; //blank
+				disp2=7'b 0000001;	//O
 				end
         default: begin 
-				disp0=7'b 1111110;
-				disp1=7'b 1111110;
-				disp3=7'b 1111111;
-				disp2=7'b 1111110;
+				disp0=7'b 1111110; //blank
+				disp1=7'b 1111110; //blank
+				disp3=7'b 1111111; //blank
+				disp2=7'b 1111110; //blank
 		  end
     endcase
 end
