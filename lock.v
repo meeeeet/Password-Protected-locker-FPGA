@@ -13,7 +13,7 @@
 module lock(
     digit,
     start,
-    reset,
+    reset, 
     clk,
     out,
     buzzer,
